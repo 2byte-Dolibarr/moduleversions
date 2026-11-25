@@ -2,6 +2,10 @@
 
 ## 24.0.0 [2026-07-30]
 - New: Compatibility with Dolibarr 24.
+- Fix: Compatibility with Dolibarr 23 (bank account of the request found by invoice + withdrawal receipt, since llx_prelevement_lignes.fk_prelevement_demande only exists from v24).
+- Fix: Dolibarr 14-16: the validation before creating a direct debit order queried llx_prelevement_demande (llx_prelevement_facture_demande before v17) and fk_societe_rib (v21+); the SQL error was ignored and the order was created without checking IBAN/BIC/mandate/holder. A read error now blocks the order.
+- Fix: Dolibarr 14: default customer bank account was not found (different CompanyBankAccount::fetch() signature), so the file could not be generated.
+- Fix: Dolibarr 14-17: pending direct debit list uses the right request table and only filters by type from v18.
 - New: Create direct debits for members
 - New: Possibility to delete direct debit requests from the list
 - New: Possibility of entering SEPA data directly at the time of generating the direct debit
